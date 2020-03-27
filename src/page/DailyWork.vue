@@ -2,7 +2,7 @@
     <div>
             <br/>
             <br/>
-            <h1>Work All</h1>
+            <h1>Daily</h1>
             <br/>
             <br/>
             <!-- <b-container> -->
@@ -26,6 +26,16 @@
             <template v-slot:cell(Row)="data">
                     {{ data.index+1 }}
             </template>
+
+            <!-- <template v-slot:cell(see)="info">
+
+            <b-button variant="danger"
+            @click="seeInfo(items[info.index].id)" 
+            >User Id : {{items[info.index].id}}
+            </b-button>
+
+            </template> -->
+            
             </b-table>
 
             <b-pagination
@@ -53,11 +63,12 @@ export default {
             headVariant: 'dark',
             fixed: false,
             bordered: true,
-            sortBy: 'id',
-            sortDesc: false,
-            fields: [{key:'id', sortable: true},'name','email',
-            'date','time','clientName','partner',
-            'matterCode','descriptions',{key:'timestamp', sortable: false}],
+            sortBy: 'timestamp',
+            sortDesc: true,
+            fields: [{key:'Row'},{key:'idUser'},'name',
+                    'date','time','clientName','partner',
+                     'matterCode','descriptions',{key:'timestamp', 
+                     sortable: true} ],
             items:null
         }
     },
@@ -70,8 +81,8 @@ export default {
         fetchData(){
         const token =  this.$store.state.store_token
             axios
-                .post("http://localhost:3020/fetchAllForAdmin", {
-                    userId:this.$store.state.store_userId
+                .post("http://localhost:3020/DailyWork", {
+                    id: this.$store.state.Admin_work_ById
                 },{
                     headers: {
                         'Content-Type':'application/json',
@@ -87,14 +98,13 @@ export default {
     },
     beforeMount(){
         this.fetchData()
+        this.$store.state.Admin_work_ById = null
+        this.$store.commit('mAdmin_work_ById')
     }
 }
 </script>
-<style>
+<style scoped>
 h1{
     text-align: center;
 }
-div.card-body{
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
 </style>

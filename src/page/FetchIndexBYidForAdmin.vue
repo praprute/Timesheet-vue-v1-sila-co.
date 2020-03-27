@@ -2,7 +2,10 @@
     <div>
             <br/>
             <br/>
-            <b-container>
+            <h1>Informations of {{nameShow}}</h1>
+            <br/>
+            <br/>
+            <!-- <b-container> -->
                 <b-card>
             <b-table 
             id="my-table"
@@ -44,7 +47,7 @@
             >
             </b-pagination>
             </b-card>
-            </b-container>
+            <!-- </b-container> -->
             <br/>
             <br/>
             <br/>
@@ -58,12 +61,16 @@ export default {
             perPage: 10,
             currentPage: 1,
             headVariant: 'dark',
-            fixed: true,
+            fixed: false,
             bordered: true,
-            sortBy: 'Row',
+            sortBy: 'timestamp',
             sortDesc: true,
-            fields: [{key:'Row'},{key:'id'},'name','email',{ key: 'see', label: "information" }],
-            items:null
+            fields: [{key:'Row'},{key:'id'},'name',
+                    'date','time','clientName','partner',
+                     'matterCode','descriptions',{key:'timestamp', 
+                     sortable: true} ],
+            items:null,
+            nameShow:null
         }
     },
     computed: {
@@ -75,7 +82,8 @@ export default {
         fetchData(){
         const token =  this.$store.state.store_token
             axios
-                .post("http://localhost:3020/fetchUserForAdmin", {
+                .post("http://localhost:3020/fetchByIdForAdmin", {
+                    id: this.$store.state.Admin_work_ById
                 },{
                     headers: {
                         'Content-Type':'application/json',
@@ -85,11 +93,9 @@ export default {
                 .then(response => {
                     if(response.data.success == "success"){
                         this.items = response.data.message
+                        this.nameShow = response.data.message[0].name
                     }
                 })
-        },
-        seeInfo(){
-            
         }
     },
     beforeMount(){

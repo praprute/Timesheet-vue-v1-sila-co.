@@ -19,6 +19,7 @@ export const store = new Vuex.Store({
         muserEmail: store => store.store_userEmail,
         muserName: store => store.store_userName,
         mtoken: store => store.store_token,
-        mstatus: store => store.store_status
+        mstatus: store => store.store_status,
+        mAdmin_work_ById: store => store.Admin_work_ById
     }
 });

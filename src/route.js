@@ -5,6 +5,7 @@ import RegisIndex from './page/RegisIndex.vue'
 import FetchAllForAdmin from './page/FetchallForAdmin.vue'
 import FetchAllUserForAdmin from './page/FetchAllUserForAdmin.vue'
 import FetchIndexByIdForAdmin from './page/FetchIndexBYidForAdmin.vue'
+import Daily from './page/DailyWork.vue'
 
 export const routes = [{
     path: "/",
@@ -27,6 +28,9 @@ export const routes = [{
         },{
             path:"/FetchIndexByIdForAdmin",
             component:FetchIndexByIdForAdmin
+        },{
+            path:"/Daily",
+            component:Daily
         }]
     }
 ]

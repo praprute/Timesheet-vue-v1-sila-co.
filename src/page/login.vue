@@ -105,12 +105,13 @@ export default {
       this.$store.state.store_userName  = null
       this.$store.state.store_token     = null
       this.$store.state.store_status    = null
+      this.$store.state.Admin_work_ById = null
       this.$store.commit('muserId')
       this.$store.commit('muserEmail')
       this.$store.commit('muserName')
       this.$store.commit('mtoken')
       this.$store.commit('mstatus')
-
+      this.$store.commit('mAdmin_work_ById')
     },
     checkStatus(){
                 axios

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-container>
+        <!-- <b-container> -->
             <br/>
             <br/>
             <b-card>
@@ -34,7 +34,7 @@
             >
             </b-pagination>
             </b-card>
-        </b-container>
+        <!-- </b-container> -->
         <br/>
         <br/>
         <br/>
@@ -48,7 +48,7 @@ export default {
             perPage: 20,
             currentPage: 1,
             headVariant: 'dark',
-            fixed: true,
+            fixed: false,
             bordered: true,
             sortBy: 'timestamp',
             sortDesc: true,

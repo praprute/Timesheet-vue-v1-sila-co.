@@ -2,7 +2,10 @@
     <div>
             <br/>
             <br/>
-            <b-container>
+            <h1>All Users</h1>
+            <br/>
+            <br/>
+            <!-- <b-container> -->
                 <b-card>
             <b-table 
             id="my-table"
@@ -43,7 +46,7 @@
             >
             </b-pagination>
             </b-card>
-            </b-container>
+            <!-- </b-container> -->
             <br/>
             <br/>
             <br/>
@@ -57,7 +60,7 @@ export default {
             perPage: 10,
             currentPage: 1,
             headVariant: 'dark',
-            fixed: true,
+            fixed: false,
             bordered: true,
             sortBy: 'Row',
             sortDesc: true,
@@ -89,35 +92,20 @@ export default {
         },
         seeInfo(data){
             console.log(data)
-        const token =  this.$store.state.store_token
-            axios
-                .post("http://localhost:3020/fetchByIdForAdmin",{
-                    id:data
-                },{
-                    headers: {
-                        'Content-Type':'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                })
-                .then(response => {
-                    if(response.data.success == "success"){
-                        this.items = response.data.message
-                        this.fields = [{key:'Row'},{key:'id'},'name',
-                                       'date','time','clientName','partner',
-                                        'matterCode','descriptions',{key:'timestamp', 
-                                        sortable: true} ]
-                        this.sortBy = 'timestamp'
-                        console.log(this.items)
-                        // this.$router.push("/FetchIndexByIdForAdmin")
-                    }
-                })
+            this.$store.state.Admin_work_ById = data
+            this.$store.commit('mAdmin_work_ById')
+            this.$router.push("/FetchIndexByIdForAdmin")
         }
     },
     beforeMount(){
         this.fetchData()
+        this.$store.state.Admin_work_ById = null
+        this.$store.commit('mAdmin_work_ById')
     }
 }
 </script>
 <style scoped>
-
+h1{
+    text-align: center;
+}
 </style>

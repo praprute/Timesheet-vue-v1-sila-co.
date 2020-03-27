@@ -23,7 +23,8 @@
       <b-navbar-nav v-else>
         <!-- <b-nav-item href="#"  @click="FetchAllForAdmin">WORK-ALLUSER</b-nav-item> -->
         <!-- <b-nav-item href="#" @click="FetchAllUserForAdmin">WORKUSERBYID</b-nav-item> -->
-        <b-nav-item href="#" @click="FetchAllUserForAdmin">ALLUSER</b-nav-item>
+        <b-nav-item href="#" @click="FetchAllUserForAdmin">All-users</b-nav-item>
+        <b-nav-item href="#" @click="Daily">Daily</b-nav-item>
       </b-navbar-nav>
         <!-- <b-nav-item href="#" disabled>REGISINDEX</b-nav-item> -->
      
@@ -61,11 +62,6 @@ import axios from 'axios'
                         if(response.data.success == "success"){
                             this.$store.state.store_status = response.data.message
                             this.$store.commit('mstatus')
-                            // if(response.data.message == "Auth"){
-                            //      this.$router.push("/UserWork")
-                            // }else if(response.data.message == "Admin"){
-                            //      this.$router.push("/FetchAllForAdmin")
-                            // }
                         }
                     })
             },
@@ -80,6 +76,9 @@ import axios from 'axios'
             },
             FetchAllUserForAdmin(){
                 this.$router.push("/FetchAllUserForAdmin")
+            },
+            Daily(){
+                this.$router.push("/Daily")
             },
             signOut(){
                 axios
@@ -101,4 +100,7 @@ import axios from 'axios'
 </script>
 <style>
 
+nav{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 </style>
