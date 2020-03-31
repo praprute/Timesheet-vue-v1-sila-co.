@@ -1,12 +1,8 @@
 <template>
-  <div id="login_page">
+  <div id="register_page">
     <div class="d-flex justify-content-center align-items-center login-container">
-      
       <form class="login-form text-center">
-        <img src="./../assets/sila_r2_c13_s1-2.png" alt="">
-        <br/>
-        <br/>
-        <h2 class="mb-5 font-weight-light text-uppercase">TIMESHEET SYSTEM</h2>
+        <h1 class="mb-5 font-weight-light text-uppercase">Register</h1>
         <div class="form-group">
           <input
             class="form-control rounded-pill form-control-lg"
@@ -27,31 +23,26 @@
             @keyup.enter="onSubmit()"
           />
         </div>
-        <div class="forgot-link form-group d-flex justify-content-between align-items-center">
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="remember" />
-            <label class="form-check-label" for="remember">Remember Password</label>
-          </div>
-          <a href="#">Forgot Password?</a>
+        <div class="form-group">
+          <input
+            class="form-control rounded-pill form-control-lg"
+            placeholder="Your name"
+            v-model="form.name"
+            type="text"
+            required
+            @keyup.enter="onSubmit()"
+          />
         </div>
         <button
-          
-          @click="login()"
+          type="submit"
+          @click="onSubmit()"
           class="btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase"
-        >Log in</button>
-        <p class="mt-3 font-weight-normal">
-          Don't have an account?
-          <a  @click="register()">
-            <strong>Register Now</strong>
-          </a>
-        </p>
+        >submit</button>
       </form>
     </div>
-
-    
   </div>
 </template>
-<script>
+<script scoped>
 import axios from "axios";
 
 export default {
@@ -59,53 +50,25 @@ export default {
     return {
       form: {
         email: "",
-        password: ""
+        password: "",
+        name: ""
       },
       show: true
     };
   },
   methods: {
-    register() {
-      this.$router.push("/register");
-    },
-    login() {
-      console.log('login')
+    onSubmit() {
       axios
-        .post("http://128.199.179.127:3021/login", {
+        .post("http://128.199.179.127:3021/register", {
           email: this.form.email,
-          password: this.form.password
+          password: this.form.password,
+          name: this.form.name.toLowerCase()
         })
         .then(response => {
           if (response.data.success == "success") {
             console.log(response.data.message);
-            this.$store.state.store_userId = response.data.message[0].id;
-            this.$store.state.store_userEmail = response.data.message[0].email;
-            this.$store.state.store_userName = response.data.message[0].name;
-            this.$store.state.store_token = response.data.token;
-
-            this.$store.commit("muserId");
-            this.$store.commit("muserEmail");
-            this.$store.commit("muserName");
-            this.$store.commit("mtoken");
-
-            // this.$router.push("/main");
-
-            axios
-                .post("http://128.199.179.127:3021/checkStatus", {
-                  email: this.$store.state.store_userEmail
-                })
-                .then(response => {
-                  if (response.data.success == "success") {
-                    this.$store.state.store_status = response.data.message;
-                    this.$store.commit("mstatus");
-                    
-                    if (response.data.message == "Auth") {
-                      this.$router.push("/UserWork");
-                    } else{
-                      this.$router.push("/FetchAllForAdmin")
-                    }
-                  }
-                })
+            alert(response.data.message_th);
+            this.$router.push("/")
           } else {
             alert(response.data.message_th);
           }
@@ -133,7 +96,7 @@ export default {
 };
 </script>
 <style scoped>
-#login_page {
+#register_page {
   margin: 0%;
   padding: 0%;
   font-family: "Poppins", sans-serif;

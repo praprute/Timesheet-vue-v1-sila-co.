@@ -2,10 +2,36 @@
   <div>
     <br />
     <br />
-    <h1>Daily</h1>
+    <h1>Period</h1>
     <br />
     <br />
     <!-- <b-container> -->
+    <b-container>
+      <b-card>
+        <br />
+        <b-row>
+          <h3>Date :</h3>
+          <b-col>
+            <b-form-datepicker id="example-datepicker" v-model="DateFvalue" class="mb-2"></b-form-datepicker>
+            <!-- <p>Value: '{{ DateFvalue }}'</p> -->
+          </b-col>
+          <h3>TO :</h3>
+          <b-col>
+            <b-form-datepicker id="example-datepicker2" v-model="DateTvalue" class="mb-2"></b-form-datepicker>
+            <!-- <p>Value: '{{ DateTvalue }}'</p> -->
+          </b-col>
+        </b-row>
+        <br />
+        <b-row>
+          <b-button block variant="success" @click="fetchDataDate">SEARCH</b-button>
+        </b-row>
+        <br />
+      </b-card>
+    </b-container>
+
+    <br />
+    <br />
+
     <b-card>
       <b-table
         id="my-table"
@@ -23,27 +49,20 @@
         :fixed="fixed"
         :bordered="bordered"
       >
-        <template v-slot:cell(Row)="data">{{ data.index+1 }}</template>
-
-        <!-- <template v-slot:cell(see)="info">
-
-            <b-button variant="danger"
-            @click="seeInfo(items[info.index].id)" 
-            >User Id : {{items[info.index].id}}
-            </b-button>
-
+        <!-- <template v-slot:cell(Row)="data">
+                    {{ data.index+1 }}
         </template>-->
       </b-table>
 
       <b-pagination
         v-model="currentPage"
-        :total-rows="rows"
         :per-page="perPage"
         aria-controls="my-table"
         align="right"
       ></b-pagination>
     </b-card>
     <!-- </b-container> -->
+    <!-- :total-rows="rows" -->
     <br />
     <br />
     <br />
@@ -62,7 +81,6 @@ export default {
       sortBy: "timestamp",
       sortDesc: true,
       fields: [
-        { key: "Row" },
         { key: "idUser" },
         "name",
         "date",
@@ -73,22 +91,27 @@ export default {
         "descriptions",
         { key: "timestamp", sortable: true }
       ],
-      items: null
+      items: null,
+      DateFvalue: "",
+      DateTvalue: ""
     };
   },
-  computed: {
-    rows() {
-      return this.items.length;
-    }
-  },
+  // computed: {
+  //   rows() {
+  //     return this.items.length
+  //   }
+  // },
   methods: {
-    fetchData() {
+    fetchDataDate() {
+      console.log(this.DateFvalue);
+      console.log(this.DatetTvalue);
       const token = this.$store.state.store_token;
       axios
         .post(
-          "http://128.199.179.127:3021/DailyWork",
+          "http://128.199.179.127:3021/AdmminOptions",
           {
-            id: this.$store.state.Admin_work_ById
+            datef: this.DateFvalue,
+            datet: this.DateTvalue
           },
           {
             headers: {
@@ -99,13 +122,20 @@ export default {
         )
         .then(response => {
           if (response.data.success == "success") {
+            console.log("Success");
+            console.log(response.data.message);
             this.items = response.data.message;
+            // this.DateFvalue = ''
+            // this.DateTvalue = ''
           }
         });
     }
   },
   beforeMount() {
-    this.fetchData();
+    // if(this.DateFvalue || this.DateTvalue !== ""){
+    //     this.fetchDataDate()
+    // }
+
     this.$store.state.Admin_work_ById = null;
     this.$store.commit("mAdmin_work_ById");
   }

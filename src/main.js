@@ -18,6 +18,11 @@ const router = new VueRouter({
   routes
 });
 
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
+  next()
+})
+
 new Vue({
   render: h => h(App),
     store,
