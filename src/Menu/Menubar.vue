@@ -3,10 +3,10 @@
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-container>
         <b-navbar-nav v-if="status == 'Auth'">
-          <b-navbar-brand href="#" @click="Mywork">SILA</b-navbar-brand>
+          <b-navbar-brand href="#" @click="Mywork">TIMESHEET</b-navbar-brand>
         </b-navbar-nav>
         <b-navbar-nav v-else>
-          <b-navbar-brand href="#" @click="FetchAllForAdmin">SILA</b-navbar-brand>
+          <b-navbar-brand href="#" @click="FetchAllForAdmin">TIMESHEET</b-navbar-brand>
         </b-navbar-nav>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -77,7 +77,6 @@
               <b-form-input
                 id="input-2"
                 v-model="formModal.matterCode"
-                required
                 placeholder="Matter Code"
               ></b-form-input>
             </b-form-group>
@@ -135,7 +134,7 @@ export default {
       const token = this.$store.state.store_token;
       axios
         .post(
-          " http://128.199.179.127:3021/fetchPartner",
+          " http://localhost:3021/fetchPartner",
           {},
           {
             headers: {
@@ -157,7 +156,7 @@ export default {
         const token = this.$store.state.store_token;
         axios
           .post(
-            "http://128.199.179.127:3021/regisIndex",
+            "http://localhost:3021/regisIndex",
             {
               idUser: this.$store.state.store_userId,
               date:         this.formModal.date.toLowerCase(),
@@ -184,10 +183,10 @@ export default {
               this.formModal.partner = null
               this.formModal.matterCode = ''
               this.formModal.descriptions = ''
-
               this.$nextTick(() => {
               this.$bvModal.hide('modal-prevent-closing')
               })
+              location.reload();
             } else {
               alert(response.data.message_th);
             }
@@ -226,7 +225,7 @@ export default {
       this.$router.push("/Division");
     },
     signOut() {
-      axios.post("http://128.199.179.127:3021/signout", {}).then(response => {
+      axios.post("http://localhost:3021/signout", {}).then(response => {
         if (response.data.success == "success") {
           this.$router.push("/");
         }

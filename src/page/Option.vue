@@ -108,7 +108,7 @@ export default {
       const token = this.$store.state.store_token;
       axios
         .post(
-          "http://128.199.179.127:3021/AdmminOptions",
+          "http://localhost:3021/AdmminOptions",
           {
             datef: this.DateFvalue,
             datet: this.DateTvalue

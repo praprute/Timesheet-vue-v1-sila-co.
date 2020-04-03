@@ -29,8 +29,10 @@
           <b-button
             variant="danger"
             @click="seeInfo(items[info.index].id)"
-          >User Id : {{items[info.index].id}}</b-button>
+          >User Id : {{items[info.index].id}}
+          </b-button>
         </template>
+
       </b-table>
 
       <b-pagination
@@ -79,7 +81,7 @@ export default {
       const token = this.$store.state.store_token;
       axios
         .post(
-          "http://128.199.179.127:3021/fetchUserForAdmin",
+          "http://localhost:3021/fetchUserForAdmin",
           {},
           {
             headers: {

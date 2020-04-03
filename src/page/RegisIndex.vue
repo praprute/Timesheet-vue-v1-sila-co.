@@ -18,7 +18,6 @@
             </b-form-group>
 
             <b-form-group id="input-group-1" label="Client Name" label-for="input-1">
-              
               <b-form-input
                 id="input-1"
                 v-model="form.clientName"
@@ -42,7 +41,6 @@
             </b-form-group>
 
             <b-form-group id="input-group-4" label="Descriptions" label-for="input-4">
-              
               <b-form-textarea
                 id="textarea-rows"
                 v-model="form.descriptions"
@@ -96,7 +94,7 @@ export default {
       const token = this.$store.state.store_token;
       axios
         .post(
-          " http://128.199.179.127:3021/fetchPartner",
+          " http://localhost:3021/fetchPartner",
           {},
           {
             headers: {
@@ -119,7 +117,7 @@ export default {
         const token = this.$store.state.store_token;
         axios
           .post(
-            "http://128.199.179.127:3021/regisIndex",
+            "http://localhost:3021/regisIndex",
             {
               idUser: this.$store.state.store_userId,
               date: this.form.date.toLowerCase(),

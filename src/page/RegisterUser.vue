@@ -59,7 +59,7 @@ export default {
   methods: {
     onSubmit() {
       axios
-        .post("http://128.199.179.127:3021/register", {
+        .post("http://localhost:3021/register", {
           email: this.form.email,
           password: this.form.password,
           name: this.form.name.toLowerCase()
@@ -68,7 +68,7 @@ export default {
           if (response.data.success == "success") {
             console.log(response.data.message);
             alert(response.data.message_th);
-            this.$router.push("/")
+            this.$router.push("/");
           } else {
             alert(response.data.message_th);
           }
@@ -125,19 +125,19 @@ export default {
   color: #666;
 }
 .login-form a:hover {
-  color: #3B4F92;
+  color: #3b4f92;
 }
 .forgot-link {
   font-size: 13px;
 }
 
 .form-control:focus {
-  border-color: #3B4F92;
-  box-shadow: 0 0 0 0.2rem rgba(59,79,146,0.25);
+  border-color: #3b4f92;
+  box-shadow: 0 0 0 0.2rem rgba(59, 79, 146, 0.25);
 }
 .btn-custom {
-  background: #3B4F92;
-  border-color: #3B4F92;
+  background: #3b4f92;
+  border-color: #3b4f92;
   color: #fff;
   font-size: 15px;
   font-weight: 600;
@@ -147,11 +147,11 @@ export default {
 .btn-custom:hover,
 .btn-custom:active,
 .btn-custom:active:focus {
-  background: #1775A7;
-  border-color: #1775A7;
+  background: #1775a7;
+  border-color: #1775a7;
   color: #fff;
 }
 .btn-custom:focus {
-  box-shadow: 0 0 0 0.2rem rgba(59,79,146,0.25);
+  box-shadow: 0 0 0 0.2rem rgba(59, 79, 146, 0.25);
 }
 </style>

@@ -77,7 +77,7 @@ export default {
       const token = this.$store.state.store_token;
       axios
         .post(
-          "http://128.199.179.127:3021/fetchAllForAdmin",
+          "http://localhost:3021/fetchAllForAdmin",
           {
             userId: this.$store.state.store_userId
           },

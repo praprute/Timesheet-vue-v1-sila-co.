@@ -87,7 +87,7 @@ export default {
       const token = this.$store.state.store_token;
       axios
         .post(
-          "http://128.199.179.127:3021/fetchByIdForAdmin",
+          "http://localhost:3021/fetchByIdForAdmin",
           {
             id: this.$store.state.Admin_work_ById
           },

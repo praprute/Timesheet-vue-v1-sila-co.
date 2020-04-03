@@ -1,11 +1,10 @@
 <template>
   <div id="login_page">
     <div class="d-flex justify-content-center align-items-center login-container">
-      
       <form class="login-form text-center">
-        <img src="./../assets/sila_r2_c13_s1-2.png" alt="">
-        <br/>
-        <br/>
+        <img src="./../assets/sila_r2_c13_s1-2.png" alt />
+        <br />
+        <br />
         <h2 class="mb-5 font-weight-light text-uppercase">TIMESHEET SYSTEM</h2>
         <div class="form-group">
           <input
@@ -35,20 +34,17 @@
           <a href="#">Forgot Password?</a>
         </div>
         <button
-          
           @click="login()"
           class="btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase"
         >Log in</button>
         <p class="mt-3 font-weight-normal">
           Don't have an account?
-          <a  @click="register()">
+          <a @click="register()">
             <strong>Register Now</strong>
           </a>
         </p>
       </form>
     </div>
-
-    
   </div>
 </template>
 <script>
@@ -69,9 +65,9 @@ export default {
       this.$router.push("/register");
     },
     login() {
-      console.log('login')
+      console.log("login");
       axios
-        .post("http://128.199.179.127:3021/login", {
+        .post("http://localhost:3021/login", {
           email: this.form.email,
           password: this.form.password
         })
@@ -91,21 +87,21 @@ export default {
             // this.$router.push("/main");
 
             axios
-                .post("http://128.199.179.127:3021/checkStatus", {
-                  email: this.$store.state.store_userEmail
-                })
-                .then(response => {
-                  if (response.data.success == "success") {
-                    this.$store.state.store_status = response.data.message;
-                    this.$store.commit("mstatus");
-                    
-                    if (response.data.message == "Auth") {
-                      this.$router.push("/UserWork");
-                    } else{
-                      this.$router.push("/FetchAllForAdmin")
-                    }
+              .post("http://localhost:3021/checkStatus", {
+                email: this.$store.state.store_userEmail
+              })
+              .then(response => {
+                if (response.data.success == "success") {
+                  this.$store.state.store_status = response.data.message;
+                  this.$store.commit("mstatus");
+
+                  if (response.data.message == "Auth") {
+                    this.$router.push("/UserWork");
+                  } else {
+                    this.$router.push("/FetchAllForAdmin");
                   }
-                })
+                }
+              });
           } else {
             alert(response.data.message_th);
           }
@@ -162,19 +158,19 @@ export default {
   color: #666;
 }
 .login-form a:hover {
-  color: #3B4F92;
+  color: #3b4f92;
 }
 .forgot-link {
   font-size: 13px;
 }
 
 .form-control:focus {
-  border-color: #3B4F92;
-  box-shadow: 0 0 0 0.2rem rgba(59,79,146,0.25);
+  border-color: #3b4f92;
+  box-shadow: 0 0 0 0.2rem rgba(59, 79, 146, 0.25);
 }
 .btn-custom {
-  background: #3B4F92;
-  border-color: #3B4F92;
+  background: #3b4f92;
+  border-color: #3b4f92;
   color: #fff;
   font-size: 15px;
   font-weight: 600;
@@ -184,11 +180,11 @@ export default {
 .btn-custom:hover,
 .btn-custom:active,
 .btn-custom:active:focus {
-  background: #1775A7;
-  border-color: #1775A7;
+  background: #1775a7;
+  border-color: #1775a7;
   color: #fff;
 }
 .btn-custom:focus {
-  box-shadow: 0 0 0 0.2rem rgba(59,79,146,0.25);
+  box-shadow: 0 0 0 0.2rem rgba(59, 79, 146, 0.25);
 }
 </style>

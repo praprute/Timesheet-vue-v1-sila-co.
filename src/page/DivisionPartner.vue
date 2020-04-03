@@ -106,7 +106,7 @@ export default {
       const token = this.$store.state.store_token;
       axios
         .post(
-          " http://128.199.179.127:3021/fetchPartner",
+          " http://localhost:3021/fetchPartner",
           {},
           {
             headers: {
@@ -128,7 +128,7 @@ export default {
       const token = this.$store.state.store_token;
       axios
         .post(
-          "http://128.199.179.127:3021/Division",
+          "http://localhost:3021/Division",
           {
             partner: this.selected
           },
